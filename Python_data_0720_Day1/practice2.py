@@ -1,10 +1,3 @@
-"""
-프로그램명: Practice 2
-전체 설명:
-    api_response.json의 상품 데이터를 Pydantic v2로 검증하고,
-    정상 데이터와 오염 데이터를 분리한 뒤 실패 사유를 출력한다.
-"""
-
 import json
 
 from pydantic import (
