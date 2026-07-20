@@ -1,4 +1,5 @@
 import csv
+import tracemalloc
 from collections import Counter
 from functools import reduce
 
@@ -42,7 +43,6 @@ print(status_counter.most_common(5))
 total = 0
 by_status = Counter()
 by_path = Counter()
-by_hour = Counter()
 by_ip = Counter()
 
 for row in read_logs("data/web_logs.csv"):
@@ -50,9 +50,6 @@ for row in read_logs("data/web_logs.csv"):
     by_status[row["status"]] += 1
     by_path[row["path"]] += 1
     by_ip[row["ip"]] += 1
-
-    hour = row["timestamp"][11:13]
-    by_hour[hour] += 1
 
 
 # 6. 5xx 오류율 계산
@@ -100,7 +97,6 @@ print("-- 접속 상위 IP TOP 5 --")
 for ip, count in by_ip.most_common(5):
     print(f"{ip:<20} {count:>7,}")
 
-import tracemalloc
 
 print("\n=== 메모리 비교 ===")
 
