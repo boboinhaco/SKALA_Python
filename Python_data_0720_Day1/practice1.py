@@ -2,7 +2,6 @@ import csv
 from collections import Counter
 from functools import reduce
 
-
 # 1. 데이터 형태 확인
 with open("data/web_logs.csv", encoding="utf-8") as f:
     for i, line in enumerate(f):
@@ -58,9 +57,7 @@ for row in read_logs("data/web_logs.csv"):
 
 # 6. 5xx 오류율 계산
 err_5xx = sum(
-    count
-    for status, count in by_status.items()
-    if str(status).startswith("5")
+    count for status, count in by_status.items() if str(status).startswith("5")
 )
 
 ratio = err_5xx / total * 100
@@ -102,3 +99,29 @@ for path, count in by_path.most_common(5):
 print("-- 접속 상위 IP TOP 5 --")
 for ip, count in by_ip.most_common(5):
     print(f"{ip:<20} {count:>7,}")
+
+import tracemalloc
+
+print("\n=== 메모리 비교 ===")
+
+# readlines() 방식 메모리 측정
+tracemalloc.start()
+
+with open("data/web_logs.csv", encoding="utf-8") as file:
+    file.readlines()
+
+_, peak = tracemalloc.get_traced_memory()
+print(f"readlines 최대 메모리 : {peak / 1024 / 1024:.2f} MB")
+
+tracemalloc.stop()
+
+# 제너레이터 방식 메모리 측정
+tracemalloc.start()
+
+for _ in read_logs("data/web_logs.csv"):
+    pass
+
+_, peak = tracemalloc.get_traced_memory()
+print(f"generator 최대 메모리 : {peak / 1024:.2f} KB")
+
+tracemalloc.stop()
