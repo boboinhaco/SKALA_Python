@@ -129,7 +129,7 @@ def print_report(results: dict[str, dict]) -> None:
 def store_and_report(data: ValidatedData) -> dict[str, dict]:
     """검증 통과 데이터를 저장·성능측정하고 리포트를 출력한 뒤 결과 반환.
 
-    수집·검증을 이미 마친 호출자(main.py 등)가 재수집 없이 재사용하는 공용 함수.
+    수집·검증을 이미 마친 호출자(advanced_day1.py 등)가 재수집 없이 재사용하는 공용 함수.
     """
     frames = to_frames(data)
     results = {name: benchmark_one(name, df) for name, df in frames.items()}

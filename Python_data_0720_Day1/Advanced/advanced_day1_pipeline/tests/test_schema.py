@@ -11,7 +11,7 @@
     2026-07-22  최초 작성 — 정상/경계/오류 케이스 + validate_all 통합 테스트
 
 [실행]
-    pytest                       # day1_pipeline/ 에서
+    pytest                       # advanced_day1_pipeline/ 에서
     pytest -v tests/test_schema.py
 """
 

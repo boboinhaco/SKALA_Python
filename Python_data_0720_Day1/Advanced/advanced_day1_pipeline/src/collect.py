@@ -14,7 +14,7 @@
     2026-07-21  최초 작성 — 3개 API 비동기 수집 (asyncio.gather)
 
 [실행]
-    python -m src.collect        # day1_pipeline/ 에서 실행
+    python -m src.collect        # advanced_day1_pipeline/ 에서 실행
 """
 
 from __future__ import annotations
