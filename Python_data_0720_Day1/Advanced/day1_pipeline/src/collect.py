@@ -96,15 +96,20 @@ async def collect_all() -> dict[str, dict]:
     return {r.name: r.payload for r in results}
 
 
-def main() -> None:
-    """수집 결과를 요약 출력 (동시 수집 동작 확인용)."""
-    raw = asyncio.run(collect_all())
-    print("수집 완료 — 응답 키 요약:")
+def print_collection_summary(raw: dict[str, dict]) -> None:
+    """수집 결과의 최상위 키(일부)를 요약 출력 (collect·main 공용)."""
     for name, payload in raw.items():
         keys = (
             list(payload)[:5] if isinstance(payload, dict) else type(payload).__name__
         )
-        print(f"  [{name}] 최상위 키: {keys}")
+        print(f"  [{name}] 응답 최상위 키(일부): {keys}")
+
+
+def main() -> None:
+    """수집 결과를 요약 출력 (동시 수집 동작 확인용)."""
+    raw = asyncio.run(collect_all())
+    print("수집 완료 — 응답 키 요약:")
+    print_collection_summary(raw)
 
 
 if __name__ == "__main__":

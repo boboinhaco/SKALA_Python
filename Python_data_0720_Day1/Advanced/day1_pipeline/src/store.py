@@ -126,14 +126,22 @@ def print_report(results: dict[str, dict]) -> None:
         )
 
 
-def run() -> dict[str, dict]:
-    """수집 → 검증 → 변환 → 저장·성능 측정 → 리포트."""
-    raw = asyncio.run(collect_all())
-    data = validate_all(raw)
+def store_and_report(data: ValidatedData) -> dict[str, dict]:
+    """검증 통과 데이터를 저장·성능측정하고 리포트를 출력한 뒤 결과 반환.
+
+    수집·검증을 이미 마친 호출자(main.py 등)가 재수집 없이 재사용하는 공용 함수.
+    """
     frames = to_frames(data)
     results = {name: benchmark_one(name, df) for name, df in frames.items()}
     print_report(results)
     return results
+
+
+def run() -> dict[str, dict]:
+    """수집 → 검증 → 저장·성능 측정 → 리포트 (단독 실행 진입점)."""
+    raw = asyncio.run(collect_all())
+    data = validate_all(raw)
+    return store_and_report(data)
 
 
 if __name__ == "__main__":

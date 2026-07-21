@@ -18,9 +18,9 @@ from __future__ import annotations
 
 import asyncio
 
-from src.collect import collect_all
+from src.collect import collect_all, print_collection_summary
 from src.schema import validate_all
-from src.store import benchmark_one, print_report, to_frames
+from src.store import store_and_report
 
 
 def main() -> None:
@@ -29,9 +29,7 @@ def main() -> None:
     print("[1/3] 비동기 수집 (asyncio.gather — 3개 API 동시)")
     print("=" * 68)
     raw = asyncio.run(collect_all())
-    for name, payload in raw.items():
-        keys = list(payload)[:5] if isinstance(payload, dict) else payload
-        print(f"  [{name}] 응답 최상위 키(일부): {keys}")
+    print_collection_summary(raw)  # collect.py와 동일한 요약 로직 재사용
 
     # ── 2) 스키마 검증 ────────────────────────────────────────────────
     print("\n" + "=" * 68)
@@ -47,9 +45,7 @@ def main() -> None:
     print("\n" + "=" * 68)
     print("[3/3] CSV·Parquet 저장 및 읽기/쓰기 성능 비교")
     print("=" * 68)
-    frames = to_frames(data)
-    results = {name: benchmark_one(name, df) for name, df in frames.items()}
-    print_report(results)
+    store_and_report(data)  # store.py와 동일한 저장·측정 로직 재사용 (재수집 없음)
 
     print("\n✅ 파이프라인 완료 — 저장 파일: data/*.csv, data/*.parquet")
 
