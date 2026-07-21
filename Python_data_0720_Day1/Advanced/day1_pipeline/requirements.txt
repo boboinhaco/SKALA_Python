@@ -1,0 +1,10 @@
+# [Day 1] 종합 실습 - 데이터 수집 미니 파이프라인 의존 패키지
+# venv 활성화 후: pip install -r requirements.txt
+
+httpx==0.27.2            # 비동기 HTTP 클라이언트 (asyncio.gather로 3개 API 동시 수집)
+pydantic==2.9.2          # 스키마 검증 (v2 모델로 타입·범위 검증)
+pandas==2.2.3            # DataFrame 저장/집계
+pyarrow==17.0.0          # Parquet 저장·읽기 (성능 비교용)
+python-dotenv==1.0.1     # .env로 API 엔드포인트 주입 (URL을 코드/깃에 하드코딩하지 않음)
+pytest==8.3.3            # 스키마 검증 단위 테스트
+ruff==0.6.9              # 린팅·포매팅 (코드 스타일 검사)

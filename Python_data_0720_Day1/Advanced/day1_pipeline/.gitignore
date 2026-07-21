@@ -1,0 +1,17 @@
+# 실제 API 엔드포인트(open-meteo · ip-api 등)는 절대 커밋 금지
+.env
+
+# 가상환경
+.venv/
+
+# 캐시
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# 수집·저장 결과물 (재생성 가능)
+data/*.csv
+data/*.parquet
+
+# 시스템 파일
+.DS_Store
