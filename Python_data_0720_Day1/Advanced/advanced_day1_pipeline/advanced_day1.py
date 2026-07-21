@@ -1,4 +1,4 @@
-"""main.py — 데이터 수집 미니 파이프라인 전체 실행 진입점
+"""advanced_day1.py — 데이터 수집 미니 파이프라인 전체 실행 진입점
 
 [프로그램 설명]
     [Day 1] 종합 실습의 5단계를 한 번에 실행하고 결과를 화면에 출력한다.
@@ -11,7 +11,7 @@
     2026-07-22  최초 작성 — 전체 단계 실행 및 결과 출력
 
 [실행]
-    python main.py               # day1_pipeline/ 에서 (venv 활성화 후)
+    python advanced_day1.py      # advanced_day1_pipeline/ 에서 (venv 활성화 후)
 """
 
 from __future__ import annotations

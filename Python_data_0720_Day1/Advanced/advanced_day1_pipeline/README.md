@@ -33,7 +33,7 @@ cp .env.example .env             # 이후 .env를 열어 실제 URL 입력
 
 ### 2. 전체 파이프라인 실행 (결과 보기)
 ```bash
-python main.py
+python advanced_day1.py
 ```
 수집 → 검증 → 저장·성능비교 결과가 순서대로 출력된다. 저장물은 `data/*.csv`, `data/*.parquet`.
 
@@ -71,14 +71,14 @@ ruff format --check .     # 포매팅 준수 확인
 
 ## 폴더 구조
 ```
-day1_pipeline/
+advanced_day1_pipeline/
 ├── .env              # 실제 API URL (git 제외)
 ├── .env.example      # URL 템플릿 (git 포함)
 ├── .gitignore
 ├── requirements.txt  # 의존 패키지
 ├── pyproject.toml    # pytest · ruff 설정
 ├── README.md
-├── main.py           # ★ 전체 파이프라인 실행 진입점
+├── advanced_day1.py  # ★ 전체 파이프라인 실행 진입점
 ├── src/
 │   ├── collect.py    # 1) 비동기 수집 (asyncio.gather)
 │   ├── schema.py     # 2) Pydantic v2 스키마 검증
