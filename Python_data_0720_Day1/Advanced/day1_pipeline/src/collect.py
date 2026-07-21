@@ -51,21 +51,24 @@ class FetchResult:
 def _load_endpoints() -> dict[str, str]:
     """.env에서 3개 API URL을 읽어 {이름: URL} 로 반환.
 
-    누락된 URL이 있으면 어떤 키가 비었는지 명시해 즉시 실패시킨다
-    (원인을 모른 채 None으로 요청하는 상황을 방지).
+    누락되었거나(빈 값) http(s)로 시작하지 않는(자리표시자 등) URL이 있으면
+    어떤 키가 문제인지 명시해 즉시 실패시킨다. 잘못된 URL을 그대로 요청해
+    httpx가 알기 어려운 예외(UnsupportedProtocol)를 던지는 상황을 방지한다.
     """
     endpoints: dict[str, str] = {}
-    missing: list[str] = []
+    invalid: list[str] = []
     for name, env_key in _API_ENV_KEYS.items():
-        url = os.environ.get(env_key)
-        if not url:
-            missing.append(env_key)
+        url = os.environ.get(env_key, "")
+        # 빈 값이거나 http:// · https:// 로 시작하지 않으면 잘못된 값으로 간주
+        if not url.startswith(("http://", "https://")):
+            invalid.append(env_key)
         else:
             endpoints[name] = url
-    if missing:
+    if invalid:
         raise RuntimeError(
-            f".env에 다음 URL이 없습니다: {', '.join(missing)} "
-            "(.env.example 참고 후 .env를 채워주세요)"
+            f".env의 다음 URL이 비었거나 형식이 잘못됐습니다: {', '.join(invalid)}\n"
+            "  → .env.example의 자리표시자(<...입력>)를 실제 URL로 바꿔주세요.\n"
+            "  → 특히 cp .env.example .env 로 기존 .env를 덮어쓰지 않았는지 확인!"
         )
     return endpoints
 
