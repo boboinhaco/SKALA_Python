@@ -1,0 +1,22 @@
+Practice 1
+Practice 2
+Practice 3
+Practice 4
+Practice 5
+Total1
+Total2
+Total3
+
+ —> 각 폴더 당 하나의 실습 실행 파일 존재
+
+————————————————————————————————————————————————————————————————————————
+
+Advanced - 추가 과제 폴더
+	-> advanced3-1.py (실습 3에서 코드 추가)
+	-> advanced4-1.py (실습 4에서 코드 추가)
+	-> advancedTotal3-1.py(종합실습 3번에서 앱 알림 추가)
+	-> advanced_day1_pipeline (종합실습 1번 추가 실습 폴더)
+		-> advanced_day1.py (실행 파일)
+
+
+—>  Advanced 폴더 안에 advanced_day1_pipeline 폴더 존재 (오픈 소스를 활용하기 때문에 따로 폴더 생성함)
